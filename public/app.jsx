@@ -13,6 +13,7 @@ var Greeter = React.createClass({
 	onButtonClick: function(e){
 		e.preventDefault();
 
+		var nameRef = this.refs.name;
 		var name = nameRef.value;
 		nameRef.value = '';
 
