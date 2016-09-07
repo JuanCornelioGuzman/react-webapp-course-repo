@@ -5,7 +5,18 @@ var GreeterMessage = React.createClass({
 				<h1>Some H1</h1>
 				<p>Some paragraph</p>
 			</div>
-		)
+		);
+	}
+});
+
+var GreeterForm = React.createClass({
+	render: function(){
+		return (
+			<form>
+					<input type="text"/>
+					<button>Some button</button>
+			</form>
+		);
 	}
 });
 
@@ -49,6 +60,8 @@ var Greeter = React.createClass({
 						<input type="text" ref="name"/>
 						<button>Set Name</button>
 				</form>
+
+				<GreeterForm/>
 
 			</div>
 		);
