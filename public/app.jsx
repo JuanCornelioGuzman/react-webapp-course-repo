@@ -1,30 +1,43 @@
+//Presentational Component - no state
 var GreeterMessage = React.createClass({
 	render: function () {
+		var name = this.props.name;
+		var message = this.props.message;
 		return (
 			<div>
-				<h1>Some H1</h1>
-				<p>Some paragraph</p>
+				<h1>Hello {name}!</h1>
+				<p>{message}</p>
 			</div>
 		);
 	}
 });
 
 var GreeterForm = React.createClass({
+	onFormSubmit: function(e){
+		e.preventDefault();
+		var name = this.refs.name.value;
+
+		if(name.length>0){
+			this.refs.name.value = '';
+			this.props.onNewName(name);
+		}
+	},
 	render: function(){
 		return (
-			<form>
-					<input type="text"/>
+			<form onSubmit={this.onFormSubmit}>
+					<input type="text" ref="name"/>
 					<button>Some button</button>
 			</form>
 		);
 	}
 });
 
+//Container Component - maintain state
 var Greeter = React.createClass({
 	getDefaultProps: function (){
 		return {
 			name: 'React',
-			msg: 'This is from a component!'
+			message: 'This is from a component!'
 		};
 	},
 	getInitialState: function(){
@@ -32,46 +45,28 @@ var Greeter = React.createClass({
 			name: this.props.name
 		};
 	},
-	onButtonClick: function(e){
-		e.preventDefault();
-
-		var nameRef = this.refs.name;
-		var name = nameRef.value;
-		nameRef.value = '';
-
-		if(typeof name === 'string' && name.length > 0){
+	handleNewName: function(name){
 			this.setState({
 				name: name
 			});
-		}
 	},
 	render: function(){
 		var name = this.state.name;
-		var message = this.props.msg;
+		var message = this.props.message;
 
 		return (
 			<div>
-				<h1>Hello {name}!</h1>
-				<p>{message}</p>
-
-				<GreeterMessage/>
-
-				<form onSubmit={this.onButtonClick}>
-						<input type="text" ref="name"/>
-						<button>Set Name</button>
-				</form>
-
-				<GreeterForm/>
-
+				<GreeterMessage name={name} message={message}/>
+				<GreeterForm onNewName={this.handleNewName}/>
 			</div>
 		);
 	}
 });
 
 var firstName = 'Juan Cornelio';
-var customMessage = 'This is just a try.';
+var customMessage = 'This is the default message.';
 
 ReactDOM.render(
-	<Greeter name={firstName} msg={customMessage}/>,
+	<Greeter name={firstName} message={customMessage}/>,
 	document.getElementById('app')
 );
