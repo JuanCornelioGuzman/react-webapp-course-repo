@@ -12,6 +12,7 @@ var GreeterMessage = React.createClass({
 	}
 });
 
+//Presentational Component - no state
 var GreeterForm = React.createClass({
 	onFormSubmit: function(e){
 		e.preventDefault();
@@ -33,6 +34,7 @@ var GreeterForm = React.createClass({
 });
 
 //Container Component - maintain state
+//It must only render child component
 var Greeter = React.createClass({
 	getDefaultProps: function (){
 		return {
