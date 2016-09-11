@@ -1,3 +1,5 @@
+var React = require('react');
+var ReactDOM = require('react-dom')
 //Presentational Component - no state
 var GreeterMessage = React.createClass({
 	render: function () {
