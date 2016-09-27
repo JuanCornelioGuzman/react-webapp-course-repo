@@ -3,10 +3,10 @@ var React = require('react');
 //Presentational Component - no state
 var WeatherMessage = React.createClass({
 	render: function () {
-		var city = this.props.city;
+		var {city,temp} = this.props;
 		return (
 			<div>
-				<p>It's 50 degrees in {city}</p>
+				<p>It's {temp} degrees in {city}</p>
 			</div>
 		);
 	}

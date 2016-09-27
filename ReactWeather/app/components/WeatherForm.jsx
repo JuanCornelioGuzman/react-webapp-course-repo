@@ -4,15 +4,13 @@ var WeatherForm = React.createClass({
   onFormSubmit: function(e){
 		e.preventDefault();
 
-		var updates = {};
 		var city = this.refs.city.value;
 
 		if(city.length>0){
 			this.refs.city.value = '';
-			updates.city = city;
+      this.props.onSearch(city);
 		}
 
-		this.props.onNewData(updates);
 	},
   render: function(){
     return(
